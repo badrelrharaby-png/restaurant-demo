@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex"><title>FlitsFood · ontwerp Bistro</title><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23E8251F%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23FF8A1A%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2226%22%20fill%3D%22url%28%23g%29%22%2F%3E%3Cg%20fill%3D%22%23fff%22%3E%3Crect%20x%3D%2247%22%20y%3D%2213%22%20width%3D%226%22%20height%3D%2222%22%20rx%3D%223%22%2F%3E%3Crect%20x%3D%2257%22%20y%3D%2213%22%20width%3D%226%22%20height%3D%2222%22%20rx%3D%223%22%2F%3E%3Crect%20x%3D%2267%22%20y%3D%2213%22%20width%3D%226%22%20height%3D%2222%22%20rx%3D%223%22%2F%3E%3Cpath%20d%3D%22M45%2030h30v4a8%208%200%200%201-3%206L60%2052h13L36%2089l9-29H31z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);overflow-x:clip;-webkit-text-size-adjust:100%}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+.wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 28px}
+h1,h2,h3{margin:0;font-family:var(--hfont)}
+.top{position:sticky;top:0;z-index:20;background:var(--bg)}
+.top .wrap{display:flex;align-items:center;gap:22px;height:72px}
+.logo{display:flex;align-items:center;gap:6px;font-family:var(--hfont);font-weight:800;font-size:25px;letter-spacing:-.02em;flex:none}
+.logo .bolt{display:inline-flex}.logo i{font-style:normal}
+.search{flex:1;max-width:360px;display:flex;align-items:center;gap:8px;height:42px;padding:0 16px;border-radius:999px;background:#F2F2EE;color:var(--muted)}
+.search input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:500 14px var(--font);color:var(--ink)}
+.links{display:flex;gap:24px;margin-left:auto;font-weight:600;font-size:14px}
+.acct{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 16px;border-radius:999px;font-weight:700;font-size:14px;white-space:nowrap}
+.hero{position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:20px;align-items:center;padding-top:22px;padding-bottom:22px}
+.hero-text{display:grid;gap:16px;min-width:0;position:relative;z-index:2}
+h1{font-size:clamp(38px,5vw,62px);line-height:1.02;letter-spacing:-.025em}
+.sub{margin:0;font-size:17px;color:var(--muted);line-height:1.5}
+.tagline{font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px}
+.ctl{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.field{display:flex;align-items:center;gap:8px;height:46px;padding:0 14px;min-width:220px;flex:1 1 220px;max-width:300px;background:#fff;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:14px}
+.field input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:500 14px var(--font);color:inherit}
+.btn-a,.btn-b{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 20px;border:0;border-radius:12px;font:700 15px var(--font);cursor:pointer;white-space:nowrap}
+.hero-art{position:relative;min-width:0}
+.hero-art img.food{position:relative;z-index:1;width:100%;max-width:640px;margin:0 auto;filter:drop-shadow(0 18px 22px rgba(0,0,0,.25))}
+.sticker{display:none;position:absolute;z-index:3;font-family:var(--hfont);font-weight:700;background:#fff;color:#7A2CF0;padding:8px 16px;border-radius:14px;transform:rotate(-6deg);box-shadow:0 8px 18px rgba(0,0,0,.18);right:2%;top:4%}
+.scoot{display:none;position:absolute;z-index:3;left:-4%;top:30%;width:120px;filter:drop-shadow(0 8px 12px rgba(0,0,0,.18))}
+section{padding:26px 0}
+.sec-h{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.sec-h h2{font-size:24px;font-weight:800}
+.sec-h a{font-size:14px;font-weight:700;display:inline-flex;align-items:center;gap:4px}
+.rests{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.rest{position:relative;display:flex;flex-direction:column;background:var(--card);border-radius:var(--r);overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.07)}
+.rest img{width:100%;height:120px;object-fit:cover}
+.rest .heart{position:absolute;right:8px;top:8px;width:30px;height:30px;border-radius:50%;background:#fff;display:grid;place-items:center;color:#E2452B}
+.rest .rlogo{display:none;position:absolute;left:10px;top:88px;width:42px;height:42px;border-radius:50%;place-items:center;background:#111;color:#fff;font-size:10px;font-weight:800;border:2px solid #fff;text-align:center;line-height:1}
+.rbody{display:grid;gap:4px;padding:10px 12px 12px}
+.rname{font-weight:800;font-size:15px}
+.rmeta{display:flex;justify-content:space-between;gap:6px;font-size:12px;color:var(--muted)}
+.rmeta span{display:inline-flex;align-items:center;gap:3px}
+.rmeta .st{color:#F5A400}
+.rest .chev{display:none;place-items:center;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);margin-right:12px;flex:none}
+.deals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.deals.four{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.deal{position:relative;display:grid;grid-template-columns:44% 1fr;background:var(--card);border-radius:var(--r);overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.07);min-width:0}
+.deal .im{position:relative;height:132px}.deal img{width:100%;height:100%;object-fit:cover}
+.pct{position:absolute;left:8px;top:8px;font-weight:800;font-size:15px;padding:4px 9px;border-radius:8px}
+.dbody{display:grid;gap:4px;align-content:center;padding:12px 14px;min-width:0}
+.dname{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700;color:var(--muted)}
+.oldp{font-size:14px;color:var(--muted);text-decoration:line-through}
+.newp{font-size:28px;font-weight:800;line-height:1}
+.dfoot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;font-weight:700}
+.timer{display:inline-flex;align-items:center;gap:4px;font-variant-numeric:tabular-nums}
+.left{padding:2px 8px;border-radius:6px;font-size:12px}
+.bar{display:none;height:4px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden}.bar span{display:block;height:100%;width:70%}
+.cash{display:flex;align-items:center;gap:20px;padding:16px 26px;min-height:84px}
+.cash .ico3d{width:70px;height:70px}
+.cash .wal{display:none;place-items:center;width:46px;height:46px}
+.cash .gift{display:none;width:60px;height:60px}
+.cash b.big{font-size:28px;font-weight:900;font-family:var(--hfont)}
+.cash .txt{flex:1;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:18px}
+.cash small{display:block;font-size:12px;color:var(--muted);width:100%}
+.foot{padding:26px 0 36px;font-size:13px;color:var(--muted)}
+.note{position:fixed;left:12px;bottom:12px;z-index:30;background:#111;color:#fff;font:600 12px system-ui;padding:7px 11px;border-radius:9px;opacity:.85}
+.others{display:flex;gap:6px;flex-wrap:wrap}.others a{border:1px solid var(--line);padding:4px 10px;border-radius:999px}
+@media (max-width:1050px){.links{display:none}.rests,.rests.four{grid-template-columns:repeat(3,minmax(0,1fr))}.deals,.deals.four{grid-template-columns:repeat(2,minmax(0,1fr))}.rests.three{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:720px){
+.wrap{padding:0 16px}.top .wrap{height:62px;gap:10px}.search{display:none}.acct{margin-left:auto}
+.hero .wrap{grid-template-columns:minmax(0,1fr);padding-top:20px;padding-bottom:20px}
+.scoot{width:70px;left:0;top:0}
+.rests,.rests.four{display:flex;overflow-x:auto;gap:12px;margin-right:-16px;padding-right:16px;padding-bottom:8px;scroll-snap-type:x mandatory}
+.rests .rest{flex:none;width:200px;scroll-snap-align:start}
+.rests.three .rest{width:290px}
+.deals,.deals.four{grid-template-columns:minmax(0,1fr)}
+.cash{padding:14px 16px;gap:12px}.cash .ico3d{width:48px;height:48px}.cash b.big{font-size:22px}.cash .txt{font-size:15px}
+.field{max-width:none}
+.rest,.deal{transform:none!important}
+.cash-wrap{padding:0 16px!important}
+.cash .gift{display:none!important}.cash{flex-wrap:wrap}
+}
+
+:root{--bg:#FBF1E3;--card:#FFFBF5;--ink:#2B1A14;--muted:#6E5A50;--main:#C3301D;--alt:#F2B233;--line:#EFDCC6;--r:12px;--font:Inter,system-ui,sans-serif;--hfont:'DM Serif Display',Georgia,serif}
+.logo{font-family:var(--hfont);font-weight:400}.logo b{color:var(--main)}.logo .bolt{color:var(--alt)}
+.acct{background:var(--main);color:#fff;border-radius:8px}
+h1{color:var(--main);font-weight:400;letter-spacing:-.01em}
+.hero{background:var(--bg)}
+.hero-art::before{content:'';position:absolute;inset:0 -8% 6% 6%;background:linear-gradient(120deg,#B52A17,#D8462B);border-radius:60% 0 0 50%/70% 0 0 60%;z-index:0}
+.btn-a{background:var(--main);color:#fff;border-radius:8px}.btn-b{background:var(--alt);color:#2B1A14;border-radius:8px}
+.field{border-radius:8px}
+.rests.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.rests.three .rest{flex-direction:row;align-items:center}
+.rests.three .rest img{width:42%;height:120px}
+.rests.three .rest .rbody{flex:1}.rests.three .rest .rname{font-family:var(--hfont);font-size:21px;font-weight:400}
+.rests.three .rest .chev{display:grid}
+.sec-h h2{font-family:var(--hfont);color:var(--main);font-weight:400}
+.pct{background:var(--main);color:#fff;font-family:var(--hfont)!important;font-size:22px!important;border-radius:0 0 10px 0!important;left:0!important;top:0!important}
+.newp{color:var(--main);font-family:var(--hfont);font-weight:400!important}.timer{background:#F9D9CF;color:var(--main);border-radius:6px;padding:3px 10px}
+.left{background:transparent;color:var(--ink)}
+.cash{background:linear-gradient(90deg,#F7C13C,#FBD46A);border-radius:12px}.cash b.big{color:var(--main);font-family:var(--hfont);font-weight:400}
+.deal{border-radius:10px}
+</style></head><body>
+<header class="top"><div class="wrap">
+<a class="logo" href="#"><span class="bolt"><svg class="i " width="26" height="26" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span><span><b>Flits</b><i>Food</i></span></a>
+<label class="search"><svg class="i " width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input placeholder="Zoek pizza, sushi, burgers" aria-label="Zoeken"></label>
+<nav class="links"><a href="#">Restaurants</a><a href="#">Deals</a><a href="#">Mijn bestellingen</a></nav>
+<a class="acct" href="#"><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg> Mijn account</a>
+</div></header>
+<section class="hero"><div class="wrap">
+<div class="hero-text">
+<h1>Bestel bij restos<br>in jouw buurt</h1>
+<p class="sub">Bestel van lokale restaurants met bezorging of afhalen.</p>
+<div class="ctl"><label class="field"><svg class="i " width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><input placeholder="2000 Antwerpen" aria-label="Postcode"></label>
+<button class="btn-a" type="button"><svg class="i " width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.5" cy="17" r="3"/><circle cx="18.5" cy="17" r="3"/><path d="M5.5 17l4-7h5l4 7M9.5 10 12 17h3M14 6h3"/></svg> Bezorgen</button><button class="btn-b" type="button"><svg class="i " width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 14H7zM9 7a3 3 0 0 1 6 0"/></svg> Afhalen</button></div>
+
+</div>
+<div class="hero-art"><span class="sticker">Antwerpen ♥</span><img class="scoot" src="/img/icons/scooter.webp" alt=""><img class="food" src="/img/hero-gerechten.webp" alt="Pizza, burger en sushi"></div>
+</div></section>
+<section><div class="wrap">
+<div class="sec-h"><h2>Restaurants in de buurt</h2><a href="#">Bekijk alle <svg class="i " width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></div>
+<div class="rests three"><a class="rest" href="#">
+<img src="/img/spaghetti.webp" alt="Da Vinci" loading="lazy"><span class="heart"><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.1 5.2 3 1.6-1.9 3.1-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg></span><span class="rlogo">DA</span>
+<span class="rbody"><span class="rname">Da Vinci</span><span class="rmeta"><span><span class="st"><svg class="i " width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></span> 4.6 (1.240)</span><span><svg class="i " width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.5" cy="17" r="3"/><circle cx="18.5" cy="17" r="3"/><path d="M5.5 17l4-7h5l4 7M9.5 10 12 17h3M14 6h3"/></svg> 30 min</span></span></span>
+<span class="chev"><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></a><a class="rest" href="#">
+<img src="/img/sushi.webp" alt="Sushi House" loading="lazy"><span class="heart"><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.1 5.2 3 1.6-1.9 3.1-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg></span><span class="rlogo">SUSHI</span>
+<span class="rbody"><span class="rname">Sushi House</span><span class="rmeta"><span><span class="st"><svg class="i " width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></span> 4.7 (856)</span><span><svg class="i " width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.5" cy="17" r="3"/><circle cx="18.5" cy="17" r="3"/><path d="M5.5 17l4-7h5l4 7M9.5 10 12 17h3M14 6h3"/></svg> 25 min</span></span></span>
+<span class="chev"><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></a><a class="rest" href="#">
+<img src="/img/classic-smash.webp" alt="Burger Palace" loading="lazy"><span class="heart"><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.1 5.2 3 1.6-1.9 3.1-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg></span><span class="rlogo">BURGER</span>
+<span class="rbody"><span class="rname">Burger Palace</span><span class="rmeta"><span><span class="st"><svg class="i " width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></svg></span> 4.5 (720)</span><span><svg class="i " width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5.5" cy="17" r="3"/><circle cx="18.5" cy="17" r="3"/><path d="M5.5 17l4-7h5l4 7M9.5 10 12 17h3M14 6h3"/></svg> 20 min</span></span></span>
+<span class="chev"><svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></span></a></div></div></section>
+<section><div class="wrap">
+<div class="sec-h"><h2>Flash deals</h2><a href="#">Bekijk alle deals <svg class="i " width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+<div class="deals"><a class="deal" href="#">
+<span class="im"><img src="/img/diavola.webp" alt="Pizza Diavola" loading="lazy"><span class="pct">-40%</span></span>
+<span class="dbody"><span class="dname">Pizza Diavola · Pizzeria Bella</span><span class="oldp">€16,00</span><span class="newp">€9,60</span>
+<span class="bar"><span></span></span>
+<span class="dfoot"><span class="timer"><svg class="i " width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg> <span data-left="2538">00:42:18</span></span><span class="left">nog 3 over</span></span></span></a><a class="deal" href="#">
+<span class="im"><img src="/img/sushi.webp" alt="Sushi box (12 stuks)" loading="lazy"><span class="pct">-40%</span></span>
+<span class="dbody"><span class="dname">Sushi box (12 stuks) · Sushi House</span><span class="oldp">€18,00</span><span class="newp">€10,80</span>
+<span class="bar"><span></span></span>
+<span class="dfoot"><span class="timer"><svg class="i " width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg> <span data-left="2538">00:42:18</span></span><span class="left">nog 3 over</span></span></span></a><a class="deal" href="#">
+<span class="im"><img src="/img/double-cheese-smash.webp" alt="Smash burger menu" loading="lazy"><span class="pct">-40%</span></span>
+<span class="dbody"><span class="dname">Smash burger menu · Burger Palace</span><span class="oldp">€14,00</span><span class="newp">€8,40</span>
+<span class="bar"><span></span></span>
+<span class="dfoot"><span class="timer"><svg class="i " width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg> <span data-left="2538">00:42:18</span></span><span class="left">nog 3 over</span></span></span></a></div></div></section>
+<section><div class="wrap cash-wrap"><div class="cash">
+<img class="ico3d" src="/img/icons/munten.webp" alt=""><span class="wal"><svg class="i " width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M16 12.5h2M3 9h15a3 3 0 0 0-3-3"/></svg></span>
+<span class="txt"><b class="big">10% cashback</b> in je wallet<small>Verdien 10% cashback op elke bestelling en gebruik het bij je volgende bestelling.</small></span>
+<img class="gift" src="/img/icons/cadeau.webp" alt="">
+<a class="btn-a" href="#">Meer info <svg class="i " width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></section>
+<footer class="foot"><div class="wrap"><div class="others">Andere ontwerpen: <a href="/fris/">Fris</a> <a href="/nacht/">Nacht</a> <a href="/pop/">Pop</a> <a href="/minimal/">Minimal</a> <a href="/pastel/">Pastel</a></div></div></footer>
+<span class="note">Ontwerpvoorbeeld · Bistro</span>
+<script>(function(){var t0=Date.now(),els=document.querySelectorAll('[data-left]');function f(s){s=Math.max(0,s);var h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(x).padStart(2,'0')}function k(){var e=Math.floor((Date.now()-t0)/1000);els.forEach(function(x){x.textContent=f(+x.getAttribute('data-left')-e)})}k();setInterval(k,1000)})();</script>
+</body></html>
