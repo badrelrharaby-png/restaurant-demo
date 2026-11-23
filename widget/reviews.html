@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Reviews op FlitsFood</title>
+<style>
+  :root { --red: #e21321; --ink: #1a1413; --muted: #6b5f59; --line: #ece0d6; --bg: #ffffff; --soft: #fbf4ee; --gold: #f5a300; }
+  .donker { --ink: #f6efe9; --muted: #bdb0a9; --line: rgba(255,255,255,.12); --bg: #141010; --soft: #1f1918; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: transparent; }
+  body { font-family: -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; color: var(--ink); font-size: 14px; line-height: 1.45; }
+  .box { background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: 16px; max-width: 560px; }
+  .top { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .score { font-size: 34px; font-weight: 800; line-height: 1; }
+  .stars { color: var(--gold); letter-spacing: 1px; font-size: 16px; }
+  .stars .off { color: var(--line); }
+  .meta { color: var(--muted); font-size: 13px; }
+  .ff { margin-left: auto; font-weight: 800; font-style: italic; font-size: 18px; text-decoration: none; color: var(--ink); }
+  .ff span { color: var(--red); }
+  ul { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 10px; }
+  li { background: var(--soft); border-radius: 12px; padding: 10px 12px; }
+  .who { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 13px; }
+  .who b { font-size: 14px; }
+  .ver { color: #1f9d55; font-size: 12px; font-weight: 600; }
+  .donker .ver { color: #4ade80; }
+  li p { margin: 6px 0 0; }
+  .cta { display: block; text-align: center; margin-top: 14px; background: var(--red); color: #fff; text-decoration: none; font-weight: 700; padding: 11px 14px; border-radius: 10px; }
+  .empty { color: var(--muted); margin: 10px 0 0; }
+</style>
+</head>
+<body>
+<div class="box" id="box" aria-live="polite"><span class="meta">Reviews laden…</span></div>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var brand = q.get('b') || '';
+  var max = Math.min(6, Math.max(1, Number(q.get('aantal')) || 3));
+  if (q.get('thema') === 'donker') document.body.classList.add('donker');
+  var box = document.getElementById('box');
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var stars = function (v) { var n = Math.round(Number(v) || 0), s = ''; for (var i = 1; i <= 5; i++) s += i <= n ? '★' : '<span class="off">★</span>'; return '<span class="stars" aria-label="' + n + ' van 5">' + s + '</span>'; };
+  var shop = 'https://flitsfood.com/#/r/' + encodeURIComponent(brand);
+  var logo = '<a class="ff" href="https://flitsfood.com/" target="_blank" rel="noopener">Flits<span>Food</span></a>';
+  fetch('https://vbxbtkkbeutmaqcfcotn.supabase.co/rest/v1/rpc/reviews_public', {
+    method: 'POST',
+    headers: { apikey: 'sb_publishable_UiRbAIliOFBxLkNiWf7qVw_a2ciV8d3', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ p_brand: brand })
+  }).then(function (r) { return r.json(); }).then(function (d) {
+    if (!d || !d.name) { box.innerHTML = '<span class="meta">Dit restaurant staat (nog) niet op FlitsFood.</span>'; return; }
+    var head = '<div class="top">' + (d.count ? '<span class="score">' + String(d.avg).replace('.', ',') + '</span><div>' + stars(d.avg) + '<div class="meta">' + d.count + ' review' + (d.count === 1 ? '' : 's') + ' op FlitsFood</div></div>' : '<div><b>' + esc(d.name) + '</b><div class="meta">Nog geen reviews op FlitsFood</div></div>') + logo + '</div>';
+    var items = (d.reviews || []).slice(0, max).map(function (r) {
+      var score = r.delivery ? (r.food + r.delivery) / 2 : r.food;
+      var dt = r.createdAt ? new Date(Number(r.createdAt)).toLocaleDateString('nl-BE', { day: 'numeric', month: 'long' }) : '';
+      return '<li><div class="who"><b>' + esc(r.name) + '</b>' + stars(score) + '<span class="meta">' + esc(dt) + '</span></div>' +
+        '<p>' + esc(r.comment) + '</p><div class="ver">✓ Geverifieerde bestelling via flitsfood.com</div></li>';
+    }).join('');
+    box.innerHTML = head + (items ? '<ul>' + items + '</ul>' : (d.count ? '' : '<p class="empty">Bestel online en geef als eerste een review.</p>')) +
+      '<a class="cta" href="' + shop + '" target="_blank" rel="noopener">Bestel online bij ' + esc(d.name) + '</a>';
+  }).catch(function () { box.innerHTML = '<a class="cta" href="' + shop + '" target="_blank" rel="noopener">Bestel online via FlitsFood</a>'; });
+})();
+</script>
+</body>
+</html>
