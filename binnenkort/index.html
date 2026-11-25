@@ -58,6 +58,13 @@
   .balk { height: 16px; border-radius: 999px; background: rgba(255,255,255,.07); overflow: hidden; }
   .vul { height: 100%; border-radius: 999px; min-width: 6px; transition: width .25s ease; }
   .vul.ta { background: #6b5f5a; }
+  .vul.ue { background: #57504c; }
+  .vul.de { background: #7a6c66; }
+  #ueTxt, #deTxt { color: #cfc4be; }
+  input.pct { width: 54px; padding: 2px 4px; margin-right: 2px; font: 600 13px 'Inter', sans-serif; text-align: right; border-radius: 6px; border: 1px solid #3a3230; background: #0c0a0a; color: #fff; }
+  .winst-rij { display: flex; justify-content: space-between; margin-top: 6px; }
+  .winst-rij span { color: #e6dbd5; }
+  .winst-jaar { margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,182,39,.3); }
   .vul.ff { background: linear-gradient(90deg, var(--red), var(--red2)); }
   #taTxt { color: #cfc4be; } #ffTxt { color: var(--red2); }
   .winst { margin-top: 18px; padding: 14px 16px; border-radius: 12px; background: rgba(255,182,39,.12); border: 1px solid rgba(255,182,39,.35); font-size: 15px; line-height: 1.5; }
@@ -97,16 +104,30 @@
         <div class="omzet">Omzet via het platform: <b id="omzet">€3.000</b> per maand</div>
 
         <div class="balk-rij">
-          <div class="balk-kop"><span>Takeaway <small>13% commissie</small></span><b id="taTxt">€390</b></div>
+          <div class="balk-kop"><span>Takeaway <small><input class="pct" id="pTa" type="number" min="0" max="40" step="0.5" value="13" aria-label="Commissie Takeaway in procent">% commissie</small></span><b id="taTxt">€390</b></div>
           <div class="balk"><div class="vul ta" id="taBalk"></div></div>
+        </div>
+        <div class="balk-rij">
+          <div class="balk-kop"><span>Uber Eats <small><input class="pct" id="pUe" type="number" min="0" max="40" step="0.5" value="12" aria-label="Commissie Uber Eats in procent">% commissie</small></span><b id="ueTxt">€360</b></div>
+          <div class="balk"><div class="vul ue" id="ueBalk"></div></div>
+        </div>
+        <div class="balk-rij">
+          <div class="balk-kop"><span>Deliveroo <small><input class="pct" id="pDe" type="number" min="0" max="40" step="0.5" value="15" aria-label="Commissie Deliveroo in procent">% commissie</small></span><b id="deTxt">€450</b></div>
+          <div class="balk"><div class="vul de" id="deBalk"></div></div>
         </div>
         <div class="balk-rij">
           <div class="balk-kop"><span>FlitsFood <small>€1 per bestelling</small></span><b id="ffTxt">€100</b></div>
           <div class="balk"><div class="vul ff" id="ffBalk"></div></div>
         </div>
 
-        <div class="winst">Je houdt <b id="winstMaand">€290</b> per maand meer over, of <b id="winstJaar">€3.480</b> per jaar.</div>
-        <p class="klein">Commissie van Takeaway: 13% (eigen bezorging). Betaalkosten zijn bij beide niet meegerekend.</p>
+        <div class="winst">
+          Met FlitsFood hou je per maand meer over:
+          <div class="winst-rij"><span>tegenover Takeaway</span><b id="wTa">€290</b></div>
+          <div class="winst-rij"><span>tegenover Uber Eats</span><b id="wUe">€260</b></div>
+          <div class="winst-rij"><span>tegenover Deliveroo</span><b id="wDe">€350</b></div>
+          <div class="winst-jaar">Per jaar tot <b id="wJaar">€4.200</b></div>
+        </div>
+        <p class="klein">Commissies bij eigen bezorging. Richtwaarden: pas ze aan naar je eigen contract. Betaalkosten zijn nergens meegerekend.</p>
       </div>
     </div>
   </div>
@@ -128,20 +149,26 @@
     var eur = function (n) { return '€' + Math.round(n).toLocaleString('nl-BE'); };
     function reken() {
       var aantal = +$('aantal').value, bedrag = +$('bedrag').value;
-      var omzet = aantal * bedrag, ta = omzet * 0.13, ff = aantal * 1;
+      var pct = function (id) { var v = parseFloat($(id).value); return isFinite(v) && v >= 0 ? v / 100 : 0; };
+      var omzet = aantal * bedrag, ff = aantal * 1;
+      var k = { ta: omzet * pct('pTa'), ue: omzet * pct('pUe'), de: omzet * pct('pDe') };
       $('aantalTxt').textContent = aantal;
       $('bedragTxt').textContent = eur(bedrag);
       $('omzet').textContent = eur(omzet);
-      $('taTxt').textContent = eur(ta);
       $('ffTxt').textContent = eur(ff);
-      var max = Math.max(ta, ff, 1);
-      $('taBalk').style.width = (ta / max * 100) + '%';
+      var max = Math.max(k.ta, k.ue, k.de, ff, 1);
+      ['ta', 'ue', 'de'].forEach(function (p) {
+        $(p + 'Txt').textContent = eur(k[p]);
+        $(p + 'Balk').style.width = (k[p] / max * 100) + '%';
+      });
       $('ffBalk').style.width = (ff / max * 100) + '%';
-      $('winstMaand').textContent = eur(ta - ff);
-      $('winstJaar').textContent = eur((ta - ff) * 12);
+      var w = function (v) { return v > 0 ? eur(v) : '€0'; };
+      $('wTa').textContent = w(k.ta - ff);
+      $('wUe').textContent = w(k.ue - ff);
+      $('wDe').textContent = w(k.de - ff);
+      $('wJaar').textContent = w((Math.max(k.ta, k.ue, k.de) - ff) * 12);
     }
-    $('aantal').addEventListener('input', reken);
-    $('bedrag').addEventListener('input', reken);
+    ['aantal', 'bedrag', 'pTa', 'pUe', 'pDe'].forEach(function (id) { $(id).addEventListener('input', reken); });
     reken();
   })();
   if (location.search.indexOf('fout=1') > -1) { document.getElementById('team').open = true; document.getElementById('fout').hidden = false; }
