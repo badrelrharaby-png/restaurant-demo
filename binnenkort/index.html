@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlitsFood – binnenkort live</title>
+<meta name="description" content="FlitsFood: eten bestellen bij lokale zaken, met flits deals en cashback. Binnenkort live.">
+<link rel="icon" type="image/png" href="/img/nz/logo-icoon-32.png?v=1">
+<link rel="apple-touch-icon" href="/img/nz/logo-icoon-180.png?v=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --black: #0c0a0a; --coal: #171313; --red: #e21321; --red2: #ff4a2e; --gold: #ffb627; --muted: #b9aca5; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif; color: #fff; background: var(--black);
+    display: flex; flex-direction: column; min-height: 100vh;
+  }
+  .hero {
+    flex: 1; position: relative; display: flex; align-items: center; justify-content: center;
+    padding: 40px 20px; overflow: hidden;
+    background: linear-gradient(180deg, rgba(12,10,10,.72), rgba(12,10,10,.92) 70%, var(--black)), url('/img/nz/hero.webp') center/cover no-repeat;
+  }
+  .kaart { position: relative; max-width: 600px; width: 100%; text-align: center; }
+  .logo { display: block; margin: 0 auto 38px; width: min(300px, 78vw); height: auto; }
+  .label {
+    display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(100deg, var(--red), var(--red2));
+    font: 700 13px 'Poppins', sans-serif; letter-spacing: .12em; text-transform: uppercase;
+    padding: 7px 16px; border-radius: 999px; margin-bottom: 20px;
+  }
+  .label svg { width: 14px; height: 14px; }
+  h1 { font: 800 clamp(32px, 7.5vw, 52px)/1.08 'Poppins', sans-serif; letter-spacing: -0.02em; margin-bottom: 18px; }
+  h1 em { font-style: normal; color: var(--gold); }
+  p.uitleg { font-size: 17px; line-height: 1.6; color: var(--muted); margin: 0 auto 30px; max-width: 480px; }
+  .punten { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 36px; }
+  .punten span { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); border-radius: 999px; padding: 8px 16px; font-size: 14px; font-weight: 600; }
+  .punten b { color: var(--gold); }
+  .resto { background: var(--coal); border: 1px solid rgba(255,255,255,.1); border-left: 5px solid var(--red); border-radius: 16px; padding: 20px 22px; text-align: left; }
+  .resto strong { display: block; font: 700 17px 'Poppins', sans-serif; margin-bottom: 4px; }
+  .resto p { color: var(--muted); font-size: 15px; line-height: 1.5; }
+  .resto a { color: #fff; font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--red); }
+  .reken { margin-top: 18px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,.1); }
+  .schuif { margin-bottom: 16px; }
+  .schuif label { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+  .schuif label b { color: #fff; font: 700 18px 'Poppins', sans-serif; }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 999px; background: #3a3230; padding: 0; border: 0; outline: none; cursor: pointer; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: var(--red); border: 4px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,.5); }
+  input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--red); border: 4px solid #fff; }
+  input[type=range]:focus-visible { box-shadow: 0 0 0 3px rgba(226,19,33,.5); }
+  .omzet { font-size: 14px; color: var(--muted); margin: 4px 0 18px; }
+  .omzet b { color: #fff; }
+  .balk-rij { margin-bottom: 14px; }
+  .balk-kop { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; font-weight: 600; font-size: 15px; }
+  .balk-kop small { font-weight: 400; color: var(--muted); font-size: 13px; margin-left: 6px; }
+  .balk-kop b { font: 800 22px 'Poppins', sans-serif; }
+  .balk { height: 16px; border-radius: 999px; background: rgba(255,255,255,.07); overflow: hidden; }
+  .vul { height: 100%; border-radius: 999px; min-width: 6px; transition: width .25s ease; }
+  .vul.ta { background: #6b5f5a; }
+  .vul.ff { background: linear-gradient(90deg, var(--red), var(--red2)); }
+  #taTxt { color: #cfc4be; } #ffTxt { color: var(--red2); }
+  .winst { margin-top: 18px; padding: 14px 16px; border-radius: 12px; background: rgba(255,182,39,.12); border: 1px solid rgba(255,182,39,.35); font-size: 15px; line-height: 1.5; }
+  .winst b { color: var(--gold); font: 800 18px 'Poppins', sans-serif; }
+  p.klein { margin-top: 10px; font-size: 12px; color: #7d716b; }
+  footer { text-align: center; padding: 18px 20px 22px; font-size: 13px; color: #7d716b; background: var(--black); }
+  details { margin-top: 8px; }
+  summary { cursor: pointer; list-style: none; font-size: 12px; color: #5a504b; }
+  summary::-webkit-details-marker { display: none; }
+  form { display: flex; gap: 8px; justify-content: center; margin-top: 10px; }
+  input { font: inherit; padding: 9px 12px; border: 1px solid #3a3230; background: var(--coal); color: #fff; border-radius: 10px; width: 180px; }
+  button { font: 600 14px 'Inter', sans-serif; padding: 9px 16px; border: 0; border-radius: 10px; background: var(--red); color: #fff; cursor: pointer; }
+  .fout { color: var(--red2); font-size: 13px; margin-top: 8px; }
+</style>
+</head>
+<body>
+<section class="hero">
+  <div class="kaart">
+    <img class="logo" src="/img/nz/logo.png?v=1" alt="FlitsFood" width="1110" height="312">
+    <div><span class="label"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Binnenkort live</span></div>
+    <h1>Eten bestellen, <em>sneller</em> en voordeliger</h1>
+    <p class="uitleg">FlitsFood brengt je rechtstreeks bij lokale restaurants. Zelfde zaak, zelfde eten, eerlijke prijs.</p>
+    <div class="punten"><span><b>⚡</b> Flits deals</span><span><b>€</b> Cashback op je bestelling</span><span><b>♥</b> Lokale zaken</span></div>
+    <div class="resto">
+      <strong>Heb je een restaurant?</strong>
+      <p>Doe mee vanaf de start: €1 per bestelling, geen percentage, geen abonnement. Mail ons op <a href="mailto:info@flitsfood.com">info@flitsfood.com</a>.</p>
+
+      <div class="reken" id="reken">
+        <div class="schuif">
+          <label for="aantal">Bestellingen per maand <b id="aantalTxt">100</b></label>
+          <input id="aantal" type="range" min="10" max="1000" step="10" value="100">
+        </div>
+        <div class="schuif">
+          <label for="bedrag">Gemiddeld bedrag per bestelling <b id="bedragTxt">€30</b></label>
+          <input id="bedrag" type="range" min="10" max="80" step="1" value="30">
+        </div>
+        <div class="omzet">Omzet via het platform: <b id="omzet">€3.000</b> per maand</div>
+
+        <div class="balk-rij">
+          <div class="balk-kop"><span>Takeaway <small>13% commissie</small></span><b id="taTxt">€390</b></div>
+          <div class="balk"><div class="vul ta" id="taBalk"></div></div>
+        </div>
+        <div class="balk-rij">
+          <div class="balk-kop"><span>FlitsFood <small>€1 per bestelling</small></span><b id="ffTxt">€100</b></div>
+          <div class="balk"><div class="vul ff" id="ffBalk"></div></div>
+        </div>
+
+        <div class="winst">Je houdt <b id="winstMaand">€290</b> per maand meer over, of <b id="winstJaar">€3.480</b> per jaar.</div>
+        <p class="klein">Commissie van Takeaway: 13% (eigen bezorging). Betaalkosten zijn bij beide niet meegerekend.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  © FlitsFood
+  <details id="team">
+    <summary>Team</summary>
+    <form method="post" action="/gate.php">
+      <input name="toegang" type="password" placeholder="Toegangscode" autocomplete="off" aria-label="Toegangscode">
+      <button type="submit">Open</button>
+    </form>
+    <div class="fout" id="fout" hidden>Die code klopt niet.</div>
+  </details>
+</footer>
+<script>
+  (function () {
+    var $ = function (id) { return document.getElementById(id); };
+    var eur = function (n) { return '€' + Math.round(n).toLocaleString('nl-BE'); };
+    function reken() {
+      var aantal = +$('aantal').value, bedrag = +$('bedrag').value;
+      var omzet = aantal * bedrag, ta = omzet * 0.13, ff = aantal * 1;
+      $('aantalTxt').textContent = aantal;
+      $('bedragTxt').textContent = eur(bedrag);
+      $('omzet').textContent = eur(omzet);
+      $('taTxt').textContent = eur(ta);
+      $('ffTxt').textContent = eur(ff);
+      var max = Math.max(ta, ff, 1);
+      $('taBalk').style.width = (ta / max * 100) + '%';
+      $('ffBalk').style.width = (ff / max * 100) + '%';
+      $('winstMaand').textContent = eur(ta - ff);
+      $('winstJaar').textContent = eur((ta - ff) * 12);
+    }
+    $('aantal').addEventListener('input', reken);
+    $('bedrag').addEventListener('input', reken);
+    reken();
+  })();
+  if (location.search.indexOf('fout=1') > -1) { document.getElementById('team').open = true; document.getElementById('fout').hidden = false; }
+</script>
+</body>
+</html>
