@@ -6,7 +6,7 @@ DirectoryIndex index.html
 RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-RewriteRule ^(keuken|koerier|eigenaar|beheer|resto|widget|img|binnenkort)(/|$) - [L]
+RewriteRule ^(keuken|koerier|eigenaar|beheer|resto|widget|img|binnenkort|aanmelden|video|kennismaking|m)(/|$) - [L]
 RewriteRule ^gate\.php$ - [L]
 RewriteCond %{REQUEST_URI} (^/$|/$|\.html$)
 RewriteRule ^ /gate.php [L,QSA]

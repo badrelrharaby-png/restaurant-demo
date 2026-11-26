@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FlitsFood in 1 minuut</title>
+<meta name="description" content="Bekijk in 1 minuut hoe FlitsFood werkt voor je restaurant: € 1 per bestelling in plaats van een percentage.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="FlitsFood in 1 minuut">
+<meta property="og:description" content="€ 1 per bestelling in plaats van een percentage. Keukentablet, koerier-app en dashboard inbegrepen.">
+<meta property="og:image" content="https://flitsfood.com/video/mail-thumb.jpg">
+<link rel="icon" href="/img/nz/logo.png">
+<style>
+  :root { --rood: #e21321; --zwart: #0c0a0a; --tekst: #f1e8e2; --grijs: #bdb0a9; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: radial-gradient(circle at 80% 10%, rgba(226,19,33,.28), transparent 55%), var(--zwart); color: var(--tekst); font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; min-height: 100vh; }
+  main { max-width: 980px; margin: 0 auto; padding: 28px 16px 56px; }
+  .logo { height: 44px; width: auto; display: block; }
+  h1 { font-size: clamp(28px, 5vw, 46px); line-height: 1.1; margin: 28px 0 10px; color: #fff; font-style: italic; font-weight: 800; }
+  h1 span { color: var(--rood); }
+  p.sub { margin: 0 0 22px; color: var(--grijs); font-size: 18px; }
+  video { width: 100%; aspect-ratio: 16 / 9; border-radius: 18px; background: #000; box-shadow: 0 30px 80px rgba(0,0,0,.5); display: block; }
+  .knoppen { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+  .knop { display: inline-block; padding: 16px 26px; border-radius: 14px; font-weight: 800; font-size: 18px; text-decoration: none; }
+  .knop.rood { background: var(--rood); color: #fff; }
+  .knop.rand { border: 2px solid rgba(255,255,255,.25); color: #fff; }
+  ul { margin: 30px 0 0; padding: 0; list-style: none; display: grid; gap: 10px; font-size: 17px; }
+  li::before { content: "✓"; color: var(--rood); font-weight: 800; margin-right: 10px; }
+</style>
+</head>
+<body>
+<main>
+  <img class="logo" src="/img/nz/logo.png" alt="FlitsFood">
+  <h1>Wees je concurrent <span>voor</span>.</h1>
+  <p class="sub">€ 1 per bestelling, geen percentage. Zo werkt FlitsFood voor je zaak, in 1 minuut.</p>
+  <video controls playsinline preload="metadata" poster="/video/poster.jpg">
+    <source src="/video/flitsfood-1-minuut.mp4" type="video/mp4">
+  </video>
+  <div class="knoppen">
+    <a class="knop rood" href="/aanmelden/">Meld je restaurant aan →</a>
+    <a class="knop rand" href="/binnenkort/">Bereken wat je bespaart</a>
+    <a class="knop rand" href="/kennismaking/">📅 Plan een kennismaking</a>
+  </div>
+  <ul>
+    <li>€ 1 per bestelling, hoe groot de bestelling ook is</li>
+    <li>Keukentablet, koerier-app, dashboard en eigenaar-app inbegrepen</li>
+    <li>Je klanten blijven van jou: hun tegoed besteden ze alleen bij jou</li>
+  </ul>
+</main>
+<script src="/m/t.js" data-page="video"></script>
+<script>
+(function () {
+  // Opvolging per zaak (alleen wie via de mail kwam): afgespeeld en (bijna) uitgekeken.
+  // Teller voor iedereen: alleen aantallen per bron (mail, instagram, facebook, ...), geen persoonsgegevens.
+  var v = document.querySelector('video'), gespeeld = false, uit = false;
+  var qs = new URLSearchParams(location.search), ref = '';
+  try { ref = document.referrer ? new URL(document.referrer).hostname.replace(/^(www|m|l|lm)\./, '').split('.')[0] : ''; } catch (e) {}
+  if (ref === 'flitsfood') ref = '';
+  var bron = window.ffMail.token ? 'mail' : (qs.get('utm_source') || ref || 'direct');
+  function tel(kind) {
+    fetch('https://vbxbtkkbeutmaqcfcotn.supabase.co/rest/v1/rpc/video_hit', { method: 'POST', keepalive: true,
+      headers: { apikey: 'sb_publishable_UiRbAIliOFBxLkNiWf7qVw_a2ciV8d3', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_kind: kind, p_src: bron }) }).catch(function () {});
+  }
+  tel('geopend');
+  v.addEventListener('play', function () { if (!gespeeld) { gespeeld = true; tel('gestart'); window.ffMail.track('afgespeeld'); } });
+  v.addEventListener('timeupdate', function () {
+    if (!uit && v.duration && v.currentTime / v.duration >= 0.9) { uit = true; tel('uitgekeken'); window.ffMail.track('uitgekeken'); }
+  });
+})();
+</script>
+</body>
+</html>

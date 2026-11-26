@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plan een kennismaking – FlitsFood</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Kies zelf een moment: we komen langs of bellen je, en tonen in een kwartiertje hoe FlitsFood werkt.">
+<link rel="icon" type="image/png" href="/img/nz/logo-icoon-32.png?v=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --black: #0c0a0a; --coal: #171313; --line: #3a3230; --red: #e21321; --red2: #ff4a2e; --gold: #ffb627; --muted: #b9aca5; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: #fff; background: var(--black); min-height: 100vh; }
+  header { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; max-width: 980px; margin: 0 auto; }
+  header img { height: 34px; width: auto; }
+  header a { color: var(--muted); font-size: 14px; text-decoration: none; }
+  main { max-width: 980px; margin: 0 auto; padding: 10px 20px 60px; }
+  .eyebrow { color: var(--red2); font: 700 13px 'Poppins', sans-serif; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  h1 { font: 800 clamp(26px, 6vw, 38px)/1.15 'Poppins', sans-serif; margin-bottom: 10px; }
+  .intro { color: var(--muted); line-height: 1.55; margin-bottom: 24px; max-width: 640px; }
+  .grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px; align-items: start; }
+  .grid > * { min-width: 0; }
+  @media (max-width: 820px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+  .kaart { background: var(--coal); border: 1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 22px; }
+  .kaart h2 { font: 700 17px 'Poppins', sans-serif; margin: 0 0 12px; }
+  .kaart h2 + .dagen, .kaart h2 + .uren { margin-bottom: 20px; }
+  .dagen { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+  .dagen button { flex: none; width: 64px; padding: 10px 0; border-radius: 14px; background: var(--black); color: #fff; border: 1.5px solid var(--line); cursor: pointer; display: grid; gap: 2px; text-align: center; font-family: inherit; }
+  .dagen button small { font-size: 12px; color: var(--muted); text-transform: lowercase; }
+  .dagen button b { font: 800 22px 'Poppins', sans-serif; }
+  .dagen button.aan { background: linear-gradient(160deg, var(--red), var(--red2)); border-color: transparent; }
+  .dagen button.aan small { color: #ffe3de; }
+  .uren { display: grid; grid-template-columns: repeat(auto-fill, minmax(78px, 1fr)); gap: 8px; }
+  .uren button { padding: 11px 0; border-radius: 12px; background: var(--black); color: #fff; border: 1.5px solid var(--line); font: 600 15px 'Inter', sans-serif; cursor: pointer; }
+  .uren button.aan { background: #fff; color: var(--black); border-color: #fff; }
+  .gekozen { background: rgba(255,182,39,.12); border: 1px solid rgba(255,182,39,.4); color: #ffe2a3; border-radius: 12px; padding: 10px 12px; margin-bottom: 14px; font-weight: 600; }
+  .seg { display: flex; background: var(--black); border: 1.5px solid var(--line); border-radius: 12px; padding: 4px; margin-bottom: 14px; }
+  .seg button { flex: 1; padding: 10px; border: 0; border-radius: 9px; background: transparent; color: var(--muted); font: 600 15px 'Inter', sans-serif; cursor: pointer; }
+  .seg button.aan { background: var(--red); color: #fff; }
+  .veld { margin-bottom: 12px; }
+  .rij { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 520px) { .rij { grid-template-columns: 1fr; } }
+  label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  label small { font-weight: 400; color: var(--muted); }
+  input, textarea { width: 100%; font: 400 16px 'Inter', sans-serif; color: #fff; background: var(--black); border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; outline: none; }
+  textarea { min-height: 64px; resize: vertical; }
+  input:focus, textarea:focus { border-color: var(--red); }
+  .hoofd { width: 100%; font: 700 17px 'Inter', sans-serif; border: 0; border-radius: 12px; padding: 15px 22px; cursor: pointer; background: linear-gradient(100deg, var(--red), var(--red2)); color: #fff; margin-top: 4px; }
+  .hoofd:disabled { opacity: .5; cursor: not-allowed; }
+  .knop { display: inline-block; font: 700 16px 'Inter', sans-serif; border-radius: 12px; padding: 14px 22px; text-decoration: none; border: 0; cursor: pointer; }
+  .knop.rood { background: linear-gradient(100deg, var(--red), var(--red2)); color: #fff; }
+  .knop.rand { background: transparent; color: #fff; border: 1.5px solid var(--line); }
+  .melding { background: rgba(255,74,46,.12); border: 1px solid rgba(255,74,46,.45); color: #ffd2c8; border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; }
+  .muted { color: var(--muted); line-height: 1.55; }
+  .klaar { text-align: center; padding: 40px 10px; }
+  .vink { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(100deg, var(--red), var(--red2)); display: grid; place-items: center; margin: 0 auto 18px; font-size: 38px; font-weight: 800; }
+  .wanneer { font: 700 20px 'Poppins', sans-serif; color: var(--gold); margin: 8px 0 10px; }
+  .klaar .muted { max-width: 480px; margin: 0 auto 18px; }
+  .knoppen { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<header>
+  <a href="/" aria-label="FlitsFood"><img src="/img/nz/logo.png?v=1" alt="FlitsFood"></a>
+  <a href="/video/">Bekijk de video</a>
+</header>
+<main>
+  <!-- Afspraak maken -->
+  <section id="plannen">
+    <p class="eyebrow">Voor restaurants</p>
+    <h1>Plan een kennismaking</h1>
+    <p class="intro">Kies een moment dat jou past. We tonen je in een kwartiertje hoe FlitsFood werkt, bij jou in de zaak of telefonisch. Geen verplichtingen.</p>
+    <div class="melding" id="melding" hidden></div>
+    <p class="muted" id="laden">Vrije momenten laden…</p>
+    <p class="muted" id="geen" hidden>Er zijn op dit moment geen vrije momenten. Mail ons op <a href="mailto:info@flitsfood.com" style="color:#fff">info@flitsfood.com</a>.</p>
+
+    <form class="grid" id="form" hidden novalidate>
+      <div class="kaart">
+        <h2>1. Kies een dag</h2>
+        <div class="dagen" id="dagen" role="radiogroup" aria-label="Dag"></div>
+        <h2>2. Kies een uur</h2>
+        <div class="uren" id="uren" role="radiogroup" aria-label="Uur"></div>
+      </div>
+      <div class="kaart">
+        <h2>3. Jouw gegevens</h2>
+        <div class="gekozen" id="gekozen" hidden></div>
+        <div class="seg" role="radiogroup" aria-label="Hoe">
+          <button type="button" class="aan" data-kind="langskomen" role="radio" aria-checked="true">Kom langs</button>
+          <button type="button" data-kind="telefoon" role="radio" aria-checked="false">Bel me op</button>
+        </div>
+        <div class="veld"><label for="restaurant">Naam van je zaak</label><input id="restaurant" maxlength="120" required></div>
+        <div class="veld"><label for="contactName">Jouw naam</label><input id="contactName" maxlength="80" autocomplete="name" required></div>
+        <div class="rij">
+          <div class="veld"><label for="phone">Gsm</label><input id="phone" type="tel" maxlength="30" autocomplete="tel" required></div>
+          <div class="veld"><label for="email">E-mail</label><input id="email" type="email" maxlength="120" autocomplete="email" required></div>
+        </div>
+        <div class="veld" id="adresVeld"><label for="address">Adres van je zaak</label><input id="address" maxlength="160" autocomplete="street-address" placeholder="Straat 1, 9100 Sint-Niklaas"></div>
+        <div class="veld"><label for="note">Iets dat we moeten weten? <small>(optioneel)</small></label><textarea id="note" maxlength="600"></textarea></div>
+        <button class="hoofd" id="bevestig" disabled>Kies eerst een uur</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Bevestigd -->
+  <section class="klaar" id="klaar" hidden>
+    <div class="vink" aria-hidden="true">✓</div>
+    <h1>Afgesproken!</h1>
+    <p class="wanneer" id="klaarWanneer"></p>
+    <p class="muted" id="klaarTekst"></p>
+    <div class="knoppen">
+      <a class="knop rood" id="ics" download="kennismaking-flitsfood.ics">Zet in je agenda</a>
+      <a class="knop rand" href="/video/">Bekijk de video</a>
+    </div>
+    <p class="muted" style="margin-top:18px;font-size:14px">Past het toch niet? In de bevestigingsmail staat een link om te annuleren.</p>
+  </section>
+
+  <!-- Annuleren (link uit de bevestigingsmail) -->
+  <section class="klaar" id="annuleer" hidden>
+    <h1 id="annTitel">Laden…</h1>
+    <p class="muted" id="annTekst"></p>
+    <div class="knoppen" id="annKnoppen" hidden>
+      <button class="knop rood" id="annJa">Ja, annuleer</button>
+      <a class="knop rand" href="/">Nee, laat staan</a>
+    </div>
+    <div class="knoppen" id="annNieuw" hidden><a class="knop rood" href="/kennismaking/">Kies een nieuw moment</a></div>
+  </section>
+</main>
+<script src="/m/t.js"></script>
+<script>
+(function () {
+  var API = 'https://vbxbtkkbeutmaqcfcotn.supabase.co/rest/v1/rpc/';
+  var KEY = 'sb_publishable_UiRbAIliOFBxLkNiWf7qVw_a2ciV8d3';
+  var $ = function (id) { return document.getElementById(id); };
+  var DAGEN = ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'];
+  var DAGEN_LANG = ['zondag', 'maandag', 'dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag'];
+  var MAANDEN = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
+  var days = [], dag = '', slot = '', kind = 'langskomen';
+
+  function rpc(name, params) {
+    return fetch(API + name, { method: 'POST', headers: { apikey: KEY, 'Content-Type': 'application/json' }, body: JSON.stringify(params) })
+      .then(function (r) { return r.text().then(function (t) { var d = t ? JSON.parse(t) : null; if (!r.ok) throw new Error((d && d.message) || ('Fout ' + r.status)); return d; }); },
+            function () { throw new Error('Geen verbinding. Controleer je internet en probeer opnieuw.'); });
+  }
+  function melding(t) { var m = $('melding'); m.textContent = t || ''; m.hidden = !t; if (t) m.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
+  function uur(iso) { return new Date(iso).toLocaleTimeString('nl-BE', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Brussels' }); }
+  function dagVan(d) { return new Date(d + 'T12:00:00'); }
+  function langeDatum(iso) {
+    var d = new Date(iso);
+    var p = new Intl.DateTimeFormat('nl-BE', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Brussels' }).format(d);
+    return p + ' om ' + uur(iso);
+  }
+  function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
+
+  // ---------- Annuleren ----------
+  var qs = new URLSearchParams(location.search);
+  var token = qs.get('annuleer');
+  if (token) {
+    $('plannen').hidden = true; $('annuleer').hidden = false;
+    rpc('appt_get', { p_token: token }).then(function (a) {
+      if (!a) { $('annTitel').textContent = 'Deze link werkt niet meer'; $('annNieuw').hidden = false; return; }
+      if (a.status === 'geannuleerd') { $('annTitel').textContent = 'Afspraak geannuleerd'; $('annTekst').textContent = 'Geen probleem. Kies gerust een ander moment.'; $('annNieuw').hidden = false; return; }
+      if (a.status !== 'gepland') { $('annTitel').textContent = 'Deze afspraak is al voorbij'; $('annNieuw').hidden = false; return; }
+      $('annTitel').textContent = 'Afspraak annuleren?';
+      $('annTekst').textContent = a.restaurant + ' · ' + langeDatum(a.startsAt);
+      $('annKnoppen').hidden = false;
+      $('annJa').onclick = function () {
+        this.disabled = true;
+        rpc('appt_cancel', { p_token: token }).catch(function () { return null; }).then(function () {
+          $('annTitel').textContent = 'Afspraak geannuleerd';
+          $('annTekst').textContent = 'Geen probleem. Kies gerust een ander moment.';
+          $('annKnoppen').hidden = true; $('annNieuw').hidden = false;
+        });
+      };
+    }, function () { $('annTitel').textContent = 'Deze link werkt niet meer'; $('annNieuw').hidden = false; });
+    return;
+  }
+
+  // ---------- Geen mails meer (link onderaan de mail aan zaakvoerders) ----------
+  var stop = qs.get('stop');
+  if (stop) {
+    $('plannen').hidden = true; $('annuleer').hidden = false;
+    rpc('lead_track', { p_token: stop, p_kind: 'stop' }).then(function (d) {
+      $('annTitel').textContent = d && d.ok ? 'Je krijgt geen mails meer van ons' : 'Deze link werkt niet meer';
+      $('annTekst').textContent = d && d.ok ? 'Sorry voor het storen' + (d.restaurant ? ', ' + d.restaurant : '') + '. Toch interesse later? Mail ons op info@flitsfood.com.' : 'Mail ons op info@flitsfood.com, dan halen we je adres meteen van de lijst.';
+    }, function () { $('annTitel').textContent = 'Er ging iets mis'; $('annTekst').textContent = 'Mail ons op info@flitsfood.com, dan halen we je adres meteen van de lijst.'; });
+    return;
+  }
+
+  // ---------- Afspraak maken ----------
+  var ff = window.ffMail || { track: function () {}, info: function () { return Promise.resolve(null); } };
+  ff.track('agenda');
+  if (qs.get('r')) $('restaurant').value = qs.get('r').slice(0, 120);
+  // Kwam je via onze mail? Dan vullen we je gegevens alvast in.
+  ff.info().then(function (d) {
+    if (!d) return;
+    [['restaurant', d.restaurant], ['contactName', d.contactName], ['phone', d.phone], ['email', d.email], ['address', d.address]].forEach(function (f) {
+      if (f[1] && !$(f[0]).value) $(f[0]).value = f[1];
+    });
+  });
+
+  function toonDagen() {
+    var box = $('dagen'); box.innerHTML = '';
+    days.forEach(function (d) {
+      var dt = dagVan(d.day);
+      var b = el('button', d.day === dag ? 'aan' : '', '<small>' + DAGEN[dt.getDay()] + '</small><b>' + dt.getDate() + '</b><small>' + MAANDEN[dt.getMonth()].slice(0, 3) + '</small>');
+      b.type = 'button'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', String(d.day === dag));
+      b.setAttribute('aria-label', DAGEN_LANG[dt.getDay()] + ' ' + dt.getDate() + ' ' + MAANDEN[dt.getMonth()]);
+      b.onclick = function () { dag = d.day; slot = ''; toonDagen(); toonUren(); };
+      box.appendChild(b);
+    });
+  }
+  function toonUren() {
+    var box = $('uren'); box.innerHTML = '';
+    var d = days.filter(function (x) { return x.day === dag; })[0];
+    (d ? d.slots : []).forEach(function (s) {
+      var b = el('button', s === slot ? 'aan' : '', uur(s));
+      b.type = 'button'; b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', String(s === slot));
+      b.onclick = function () { slot = s; toonUren(); };
+      box.appendChild(b);
+    });
+    $('gekozen').hidden = !slot;
+    $('gekozen').textContent = slot ? '📅 ' + langeDatum(slot) : '';
+    $('bevestig').disabled = !slot;
+    $('bevestig').textContent = slot ? 'Bevestig ' + uur(slot) : 'Kies eerst een uur';
+  }
+  function laad() {
+    return rpc('appt_slots', {}).then(function (d) {
+      days = Array.isArray(d) ? d : [];
+      $('laden').hidden = true;
+      if (!days.length) { $('geen').hidden = false; $('form').hidden = true; return; }
+      if (!days.some(function (x) { return x.day === dag; })) dag = days[0].day;
+      $('form').hidden = false;
+      toonDagen(); toonUren();
+    }, function (e) { $('laden').hidden = true; melding(e.message); });
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.seg button'), function (b) {
+    b.onclick = function () {
+      kind = b.getAttribute('data-kind');
+      Array.prototype.forEach.call(document.querySelectorAll('.seg button'), function (x) { x.className = x === b ? 'aan' : ''; x.setAttribute('aria-checked', String(x === b)); });
+      $('adresVeld').hidden = kind !== 'langskomen';
+    };
+  });
+
+  function icsUrl(b, waar) {
+    var f = function (d) { return d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); };
+    var s = new Date(b.startsAt), e = new Date(s.getTime() + b.minutes * 60000);
+    var body = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//FlitsFood//Kennismaking//NL', 'BEGIN:VEVENT',
+      'UID:' + b.token + '@flitsfood.com', 'DTSTAMP:' + f(new Date()), 'DTSTART:' + f(s), 'DTEND:' + f(e),
+      'SUMMARY:Kennismaking FlitsFood', 'LOCATION:' + waar.replace(/[,;]/g, '\\$&'), 'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
+    return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(body);
+  }
+
+  $('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!slot) return melding('Kies eerst een dag en een uur.');
+    var p = { restaurant: $('restaurant').value.trim(), contactName: $('contactName').value.trim(), phone: $('phone').value.trim(), email: $('email').value.trim(),
+              address: kind === 'langskomen' ? $('address').value.trim() : '', note: $('note').value.trim(), kind: kind, startsAt: slot };
+    if (!p.restaurant || !p.contactName || !p.phone || !p.email) return melding('Vul de naam van je zaak, je naam, gsm en e-mail in.');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(p.email)) return melding('Dit e-mailadres klopt niet.');
+    if (kind === 'langskomen' && p.address.length < 5) return melding('Vul het adres in waar we langs mogen komen.');
+    melding('');
+    var btn = $('bevestig'); btn.disabled = true; btn.textContent = 'Even geduld…';
+    rpc('appt_book', { p: p }).then(function (b) {
+      var waar = b.kind === 'telefoon' ? 'Telefonisch (' + p.phone + ')' : p.address;
+      $('klaarWanneer').textContent = langeDatum(b.startsAt);
+      $('klaarTekst').textContent = (b.kind === 'telefoon' ? 'We bellen je op ' + p.phone + '.' : 'We komen langs op ' + p.address + '.') + ' Je krijgt ook een bevestiging per mail.';
+      $('ics').href = icsUrl(b, waar);
+      $('plannen').hidden = true; $('klaar').hidden = false; window.scrollTo(0, 0);
+      ff.track('geboekt');
+    }, function (x) {
+      melding(x.message); slot = ''; laad();
+    });
+  });
+
+  laad();
+})();
+</script>
+</body>
+</html>
