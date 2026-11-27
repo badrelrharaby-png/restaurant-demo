@@ -60,7 +60,7 @@
   function tel(kind) {
     fetch('https://vbxbtkkbeutmaqcfcotn.supabase.co/rest/v1/rpc/video_hit', { method: 'POST', keepalive: true,
       headers: { apikey: 'sb_publishable_UiRbAIliOFBxLkNiWf7qVw_a2ciV8d3', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ p_kind: kind, p_src: bron }) }).catch(function () {});
+      body: JSON.stringify({ p_kind: kind, p_src: bron, p_token: window.ffMail.token }) }).catch(function () {});
   }
   tel('geopend');
   v.addEventListener('play', function () { if (!gespeeld) { gespeeld = true; tel('gestart'); window.ffMail.track('afgespeeld'); } });
