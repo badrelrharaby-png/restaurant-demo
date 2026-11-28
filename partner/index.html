@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0c0a0a">
+<title>FlitsFood Partner</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<style>
+  :root { --black: #0c0a0a; --coal: #1a1414; --line: rgba(255,255,255,.1); --red: #e21321; --muted: #b9aca5; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+  body {
+    font-family: Poppins, system-ui, -apple-system, 'Segoe UI', sans-serif; color: #fff;
+    background: radial-gradient(circle at 85% 90%, rgba(226,19,33,.40) 0, transparent 55%), linear-gradient(150deg, #0c0a0a, #1f1515);
+    background-attachment: fixed;
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: max(24px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+  }
+  main { width: 100%; max-width: 440px; }
+  .logo { display: block; height: 44px; width: auto; margin: 0 0 28px; }
+  h1 { font-size: 26px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 6px; }
+  .sub { color: var(--muted); margin-bottom: 22px; }
+  .roles { display: grid; gap: 12px; }
+  .role {
+    display: flex; align-items: center; gap: 16px; width: 100%; text-align: left;
+    background: var(--coal); border: 1px solid var(--line); border-radius: 18px; padding: 18px;
+    color: inherit; text-decoration: none; font: inherit; cursor: pointer;
+    transition: border-color .15s, transform .15s;
+  }
+  .role:hover, .role:focus-visible { border-color: var(--red); outline: none; transform: translateY(-1px); }
+  .role:active { transform: none; }
+  .ico { flex: none; width: 56px; height: 56px; border-radius: 14px; display: grid; place-items: center; font-size: 28px; background: rgba(226,19,33,.14); }
+  .txt { flex: 1; min-width: 0; }
+  .name { display: block; font-weight: 700; font-size: 18px; }
+  .desc { display: block; color: var(--muted); font-size: 14px; margin-top: 2px; }
+  .arr { color: var(--muted); font-size: 22px; }
+  .last { display: inline-block; margin-left: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: #fff; background: var(--red); border-radius: 10px; padding: 2px 8px; vertical-align: 2px; }
+  .foot { color: var(--muted); font-size: 13px; margin-top: 22px; text-align: center; }
+  [dir=rtl] .role { text-align: right; }
+  [dir=rtl] .arr { transform: scaleX(-1); }
+</style>
+</head>
+<body>
+<main>
+  <img class="logo" src="logo-licht.png" alt="FlitsFood">
+  <h1 id="h"></h1>
+  <p class="sub" id="sub"></p>
+  <div class="roles">
+    <a class="role" data-role="keuken"><span class="ico">🍳</span><span class="txt"><span class="name"></span><span class="desc"></span></span><span class="arr">›</span></a>
+    <a class="role" data-role="koerier"><span class="ico">🛵</span><span class="txt"><span class="name"></span><span class="desc"></span></span><span class="arr">›</span></a>
+    <a class="role" data-role="eigenaar"><span class="ico">📊</span><span class="txt"><span class="name"></span><span class="desc"></span></span><span class="arr">›</span></a>
+  </div>
+  <p class="foot" id="foot"></p>
+</main>
+<script>
+(function () {
+  // In de app (Capacitor) staan de rollen in submappen naast dit bestand; op de website op /keuken/ enz.
+  var native = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+  var url = function (r) { return native ? './' + r + '/index.html' : '/' + r + '/'; };
+  var store = {
+    get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
+  store.set('flitsfood-partner', '1');
+
+  var TX = {
+    nl: ['Wie ben je?', 'Kies hoe je FlitsFood gebruikt. De app onthoudt je keuze.', 'Keuken', 'Bestellingen ontvangen, menu en ritten', 'Koerier', 'Je ritten, rooster en beschikbaarheid', 'Eigenaar', 'Cijfers, rooster, codes en instellingen', 'Wisselen kan altijd via "Wissel van rol".', 'laatst'],
+    en: ['Who are you?', 'Choose how you use FlitsFood. The app remembers your choice.', 'Kitchen', 'Receive orders, menu and rides', 'Courier', 'Your rides, roster and availability', 'Owner', 'Figures, roster, codes and settings', 'You can always switch via "Switch role".', 'last'],
+    fr: ['Qui es-tu ?', 'Choisis comment tu utilises FlitsFood. L’app retient ton choix.', 'Cuisine', 'Recevoir les commandes, menu et courses', 'Livreur', 'Tes courses, ton planning et tes disponibilités', 'Propriétaire', 'Chiffres, planning, codes et réglages', 'Tu peux toujours changer via « Changer de rôle ».', 'dernier'],
+    de: ['Wer bist du?', 'Wähle, wie du FlitsFood nutzt. Die App merkt sich deine Wahl.', 'Küche', 'Bestellungen empfangen, Menü und Fahrten', 'Kurier', 'Deine Fahrten, Dienstplan und Verfügbarkeit', 'Inhaber', 'Zahlen, Dienstplan, Codes und Einstellungen', 'Wechseln geht immer über „Rolle wechseln“.', 'zuletzt'],
+    tr: ['Sen kimsin?', 'FlitsFood’u nasıl kullandığını seç. Uygulama seçimini hatırlar.', 'Mutfak', 'Siparişleri al, menü ve teslimatlar', 'Kurye', 'Teslimatların, vardiyan ve müsaitliğin', 'Sahip', 'Rakamlar, vardiya planı, kodlar ve ayarlar', '“Rol değiştir” ile her zaman değiştirebilirsin.', 'son'],
+    es: ['¿Quién eres?', 'Elige cómo usas FlitsFood. La app recuerda tu elección.', 'Cocina', 'Recibir pedidos, menú y repartos', 'Repartidor', 'Tus repartos, horario y disponibilidad', 'Propietario', 'Cifras, horario, códigos y ajustes', 'Siempre puedes cambiar con «Cambiar de rol».', 'último'],
+    it: ['Chi sei?', 'Scegli come usi FlitsFood. L’app ricorda la tua scelta.', 'Cucina', 'Ricevi ordini, menu e consegne', 'Corriere', 'Le tue consegne, turni e disponibilità', 'Titolare', 'Numeri, turni, codici e impostazioni', 'Puoi sempre cambiare con «Cambia ruolo».', 'ultimo'],
+    pl: ['Kim jesteś?', 'Wybierz, jak korzystasz z FlitsFood. Aplikacja zapamięta wybór.', 'Kuchnia', 'Odbieranie zamówień, menu i kursy', 'Kurier', 'Twoje kursy, grafik i dostępność', 'Właściciel', 'Wyniki, grafik, kody i ustawienia', 'Zmienić możesz zawsze przez „Zmień rolę”.', 'ostatnio'],
+    ar: ['من أنت؟', 'اختر كيف تستخدم FlitsFood. يتذكر التطبيق اختيارك.', 'المطبخ', 'استلام الطلبات والقائمة والتوصيلات', 'المندوب', 'توصيلاتك وجدولك وأوقات توفرك', 'المالك', 'الأرقام والجدول والرموز والإعدادات', 'يمكنك التغيير دائمًا عبر «تغيير الدور».', 'الأخير']
+  };
+  var lang = (store.get('flitsfood-taal') || (navigator.language || 'nl')).slice(0, 2).toLowerCase();
+  if (!TX[lang]) lang = 'nl';
+  var x = TX[lang];
+  document.documentElement.lang = lang;
+  if (lang === 'ar') document.documentElement.dir = 'rtl';
+  document.getElementById('h').textContent = x[0];
+  document.getElementById('sub').textContent = x[1];
+  document.getElementById('foot').textContent = x[8];
+
+  var last = store.get('flitsfood-rol');
+  var kies = /[?&]kies=1/.test(location.search);
+  var roles = { keuken: [x[2], x[3]], koerier: [x[4], x[5]], eigenaar: [x[6], x[7]] };
+  Array.prototype.forEach.call(document.querySelectorAll('.role'), function (a) {
+    var r = a.getAttribute('data-role');
+    a.href = url(r);
+    a.querySelector('.name').textContent = roles[r][0];
+    if (r === last) {
+      var tag = document.createElement('span'); tag.className = 'last'; tag.textContent = x[9];
+      a.querySelector('.name').appendChild(tag);
+    }
+    a.querySelector('.desc').textContent = roles[r][1];
+    a.addEventListener('click', function () { store.set('flitsfood-rol', r); });
+  });
+
+  // Gekozen rol: meteen door, tenzij iemand bewust wil wisselen (?kies=1).
+  if (last && roles[last] && !kies) location.replace(url(last));
+})();
+</script>
+</body>
+</html>
